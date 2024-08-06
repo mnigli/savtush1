@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>סבתוש</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            direction: rtl;
+        }
+        header {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            perspective: 1000px;
+            overflow: hidden;
+        }
+        .header-graphics {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+        .header-graphics::before,
+        .header-graphics::after {
+            content: '';
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        .header-graphics::before {
+            width: 100px;
+            height: 100px;
+            top: -50px;
+            left: -50px;
+        }
+        .header-graphics::after {
+            width: 150px;
+            height: 150px;
+            bottom: -75px;
+            right: -75px;
+        }
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        h1::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background-color: #fff;
+            margin: 10px auto;
+        }
+        .subheader {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .logo-container {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 1rem;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            background: linear-gradient(45deg, #3498db, #8e44ad);
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        .logo-container:hover {
+            transform: rotateY(180deg);
+        }
+        .logo-front,
+        .logo-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo-front img {
+            width: 90%;
+            height: 90%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .logo-back {
+            transform: rotateY(180deg);
+            background-color: #2980b9;
+            color: white;
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 10px;
+        }
+        .store-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 0.7rem 1.2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        .store-link::before {
+            content: '🛒';
+            margin-left: 8px;
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+        .store-link::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.3s ease;
+            border-radius: 30px;
+        }
+        .store-link:hover::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .store-link:hover::before {
+            transform: scale(1.1);
+        }
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .section-item {
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .section-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        .section-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .section-item h3 {
+            color: #333;
+        }
+        footer {
+            background-color: #34495e;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .footer-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.1) 75%, transparent 75%, transparent);
+            background-size: 50px 50px;
+            opacity: 0.3;
+        }
+        .survey-button {
+            background-color: #e74c3c;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+        .survey-button:hover {
+            background-color: #c0392b;
+        }
+        /* צבעים חדשים לרובריקות */
+        .section-item:nth-child(1) { background-color: #FFF9C4; }
+        .section-item:nth-child(2) { background-color: #C8E6C9; }
+        .section-item:nth-child(3) { background-color: #BBDEFB; }
+        .section-item:nth-child(4) { background-color: #F8BBD0; }
+        .section-item:nth-child(5) { background-color: #D7CCC8; }
+        .section-item:nth-child(6) { background-color: #FFE0B2; }
+        
+        /* סגנון מעודכן לכפתור המוזיקה והטקסט שמעליו */
+        #musicControl {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background-color 0.3s;
+        }
+        #musicControl:hover {
+            background-color: #2980b9;
+        }
+        #musicControl::before {
+            content: 'שיר הסבתוש 🎵';
+            position: absolute;
+            top: -30px;
+            right: 50%;
+            transform: translateX(50%);
+            background-color: #3498db;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        #musicControl:hover::before {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-graphics"></div>
+        <a href="C:\Users\User\‏‏מסמכים\אלי\סבתוש האתר המעודכן\pages\savtush-updated-html (5).html" class="store-link">החנות של סבתוש</a>
+        <div class="logo-container">
+            <div class="logo-front">
+                <img src="images/savtush-logo.svg.png" alt="סבתוש לוגו" class="logo">
+            </div>
+            <div class="logo-back">
+                <p>סבתוש - מחברים דורות</p>
+            </div>
+        </div>
+        <h1>סבתוש</h1>
+        <p class="subheader">הפלטפורמה הדיגיטלית של הגיל השלישי</p>
+    </header>
+    
+    <main>
+        <h2>ברוכים הבאים! מה תרצו לעשות היום?</h2>
+        <div class="section-grid">
+            <a href="C:\Users\User\‏‏מסמכים\אלי\סבתוש האתר המעודכן\pages\savtush-family-page-final.html" class="section-item">
+                <div class="section-icon">👪</div>
+                <h3>המשפחה של סבתוש</h3>
+            </a>
+            <a href="C:\Users\User\‏‏מסמכים\אלי\סבתוש האתר המעודכן\pages\savtush-content-world-final.html" class="section-item">
+                <div class="section-icon">📰</div>
+                <h3>עולם התוכן של סבתוש</h3>
+            </a>
+            <a href="C:\Users\User\‏‏מסמכים\אלי\סבתוש האתר המעודכן\pages\savtush-rights.html" class="section-item">
+                <div class="section-icon">⚖️</div>
+                <h3>הזכויות של סבתוש</h3>
+            </a>
+            <a href="C:\Users\User\‏‏מסמכים\אלי\סבתוש האתר המעודכן\pages\סבתוש-מדברת-עם-הנכדים.html" class="section-item">
+                <div class="section-icon">💬</div>
+                <h3>סבתוש מדברת עם הנכדים</h3>
+            </a>
+            <a href="C:\Users\User\‏‏מסמכים\אלי\סבתוש האתר המעודכן\pages\הסיפורים של סבתוש.html" class="section-item">
+                <div class="section-icon">📚</div>
+                <h3>הסיפורים של סבתוש</h3>
+            </a>
+            <a href="C:\Users\User\‏‏מסמכים\אלי\סבתוש האתר המעודכן\pages\savtush-recipes-page.html" class="section-item">
+                <div class="section-icon">🍲</div>
+                <h3>המתכונים של סבתוש</h3>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-pattern"></div>
+        <p>סיימת את הביקור אצל סבתוש?</p>
+        <a href="#" class="survey-button">ענו על שאלון קצר</a>
+    </footer>
+
+    <button id="musicControl">▶️</button>
+
+    <audio id="backgroundMusic" loop>
+        <source src="audio/music.mp3.mp3" type="audio/mpeg">
+        הדפדפן שלך אינו תומך בתג האודיו.
+    </audio>
+
+    <script>
+        const musicControl = document.getElementById('musicControl');
+        const backgroundMusic = document.getElementById('backgroundMusic');
+
+        musicControl.addEventListener('click', function() {
+            if (backgroundMusic.paused) {
+                backgroundMusic.play();
+                musicControl.textContent = '⏸️';
+            } else {
+                backgroundMusic.pause();
+                musicControl.textContent = '▶️';
+            }
+        });
+    </script>
+</body>
+</html>
