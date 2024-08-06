@@ -281,7 +281,7 @@
     
     <main>
         <h2>ברוכים הבאים! מה תרצו לעשות היום?</h2>
-         <a href="./pages/savtush-family-page-final.html" class="section-item">
+      <a href="./pages/savtush-family-page-final.html" class="section-item">
     <div class="section-icon">👪</div>
     <h3>המשפחה של סבתוש</h3>
 </a>
@@ -305,9 +305,6 @@
     <div class="section-icon">🍲</div>
     <h3>המתכונים של סבתוש</h3>
 </a>
-</div>
-</main>   <footer>
-        <div class="footer-pattern"></div>
         <p>סיימת את הביקור אצל סבתוש?</p>
         <a href="#" class="survey-button">ענו על שאלון קצר</a>
     </footer>
